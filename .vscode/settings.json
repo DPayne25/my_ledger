@@ -1,0 +1,20 @@
+{
+    "sqltools.connections": [
+        {
+            "pgOptions": {
+                "ssl": {
+                    "rejectUnauthorized": false
+                }
+            },
+            "ssh": "Disabled",
+            "previewLimit": 50,
+            "server": "10.",
+            "port": 5434,
+            "askForPassword": true,
+            "driver": "PostgreSQL",
+            "name": "my_ledger",
+            "database": "my_ledger",
+            "username": "postgres"
+        }
+    ]
+}
