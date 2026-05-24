@@ -15,6 +15,16 @@
             "name": "my_ledger",
             "database": "my_ledger",
             "username": "postgres"
+        },
+        {
+            "ssh": "Disabled",
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5433,
+            "driver": "PostgreSQL",
+            "name": "my_ledger_local",
+            "database": "my_ledger",
+            "username": "postgres"
         }
     ]
 }
