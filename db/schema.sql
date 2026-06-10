@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS users (
 
 -- accounts
 CREATE TABLE IF NOT EXISTS accounts (
-    id SERIAL PRIMARY KEY,
+    account_id SERIAL PRIMARY KEY,
     users_id INTEGER REFERENCES users(id),
     account_name VARCHAR(255) NOT NULL,
     bank_name VARCHAR(255) NOT NULL,
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS accounts (
 
 -- categories
 CREATE TABLE IF NOT EXISTS categories (
-    id SERIAL PRIMARY KEY,
+    category_id SERIAL PRIMARY KEY,
     category_name VARCHAR(255) NOT NULL UNIQUE,
     parent_id INTEGER REFERENCES categories(id),
     logged_at TIMESTAMPTZ DEFAULT NOW()
@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS categories (
 
 -- transactions
 CREATE TABLE IF NOT EXISTS transactions (
-    id SERIAL PRIMARY KEY,
+    transaction_id SERIAL PRIMARY KEY,
     users_id INTEGER REFERENCES users(id),
     account_id INTEGER REFERENCES accounts(id),
     plaid_transaction_id VARCHAR(255) UNIQUE,
@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS transactions (
 
 -- pending_transactions
 CREATE TABLE IF NOT EXISTS pending_transactions (
-    id SERIAL PRIMARY KEY,
+    pending_transaction_id SERIAL PRIMARY KEY,
     users_id INTEGER REFERENCES users(id),
     account_id INTEGER REFERENCES accounts(id),
     category_id INTEGER REFERENCES categories(id),
@@ -72,7 +72,7 @@ CREATE TABLE IF NOT EXISTS pending_transactions (
 
 -- budgets (amount_spent is calculated from transactions table at time of query)
 CREATE TABLE IF NOT EXISTS budgets (
-    id SERIAL PRIMARY KEY,
+    budget_id SERIAL PRIMARY KEY,
     users_id INTEGER REFERENCES users(id),
     budget_month DATE
         CONSTRAINT month_date
@@ -84,7 +84,7 @@ CREATE TABLE IF NOT EXISTS budgets (
 
 -- account_transfers
 CREATE TABLE IF NOT EXISTS account_transfers (
-    id SERIAL PRIMARY KEY,
+    account_transfer_id SERIAL PRIMARY KEY,
     users_id INTEGER REFERENCES users(id),
     amount_transferred NUMERIC(11,2)
         CHECK (amount_transferred > 0),
