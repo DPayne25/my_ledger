@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS pending_transactions (
     plaid_transaction_id VARCHAR(255) UNIQUE,
     merchant_name VARCHAR(255),
     amount NUMERIC(11,2) NOT NULL, -- reported amount when first pending
-    amount_hold NUMERIC(11,2), -- what is held against my balance
+    amount_hold NUMERIC(11,2), -- what is held against my balance may be redundant #TODO
     amount_settled NUMERIC(11,2), -- NULL until settled, then filled with the final charge
     settled_at TIMESTAMPTZ,
     is_settled BOOLEAN DEFAULT FALSE,
@@ -166,3 +166,10 @@ INNER JOIN
     ON parent_category.id = child_category.parent_id
 WHERE parent_category.parent_id IS NULL
 ORDER BY parent_category.id;
+
+SELECT * FROM accounts;
+SELECT * FROM budgets;
+SELECT * FROM categories;
+SELECT * FROM pending_transactions;
+SELECT * FROM transactions;
+SELECT * FROM account_transfers;
