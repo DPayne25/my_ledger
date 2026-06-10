@@ -27,13 +27,13 @@ CREATE VIEW IF NOT EXISTS v_balance_gap AS (
 
 -- Account Percentage of Net Liquid Worth (4)
 CREATE VIEW IF NOT EXISTS v_pct_net_liquid_worth AS (
-    SELECT a.account_name, (a.available_balance / SUM(a.available_balance)) * 100 || '%' AS pct_net_liquid_worth
-    FROM accounts AS a
+    SELECT a1.account_name, ROUND((a1.available_balance / (SELECT SUM(a2.available_balance) FROM accounts AS a2))*100, 2) || '%' AS pct_net_liquid_worth
+    FROM accounts AS a1
 );
 
 -- Stale Account Syncs(5)
 CREATE VIEW IF NOT EXISTS v_stale_account_syncs AS (
     SELECT a.account_number, a.bank_name, a.last_synced_at
     FROM accounts AS a
-    WHERE (last_synced_at + '24 hours' < now())
+    WHERE (last_synced_at + '2 minutes' < now())
 );
