@@ -17,6 +17,8 @@ CREATE VIEW IF NOT EXISTS v_total_funds_hold AS (
 -- Account Balance Gap
 CREATE VIEW IF NOT EXISTS v_balance_gap AS (
     SELECT a.account_name, a.bank_name, (current_balance - available_balance) AS accounts_balance_gap, SUM()
-    FROM accounts AS a INNER JOIN pending_transactions AS pt ON a.id = pt.account_id
+    FROM accounts AS a 
+    INNER JOIN pending_transactions AS pt ON a.id = pt.id
+
 
 )
